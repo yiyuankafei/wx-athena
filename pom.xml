@@ -10,6 +10,10 @@
   	<version>2.1.4.RELEASE</version>
   </parent>
   
+  <properties>
+  	<image.repo>registry.cn-hangzhou.aliyuncs.com</image.repo>
+  </properties>
+  
   <dependencies>
   		<dependency>
 			<groupId>org.springframework.boot</groupId>
