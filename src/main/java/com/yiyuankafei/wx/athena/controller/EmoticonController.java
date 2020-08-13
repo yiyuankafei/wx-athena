@@ -28,5 +28,12 @@ public class EmoticonController {
 		log.info("/emoticon/list查询结果:{}", list);
 		return list;
 	}
+	
+	@RequestMapping("/get")
+	public Emoticon get(Integer id) {
+		Emoticon emoticon = emoticonService.selectByPrimaryKey(id);
+		log.info("/emoticon/get查询结果:{}", emoticon);
+		return emoticon;
+	}
  
 }
