@@ -3,6 +3,8 @@ package com.yiyuankafei.wx.athena.controller;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yiyuankafei.wx.athena.entity.wx.Message;
+import com.yiyuankafei.wx.athena.util.MessageUtil;
 import com.yiyuankafei.wx.athena.util.SHA1Util;
 
 @RestController
@@ -43,6 +47,7 @@ public class CallbackController {
 		return "";
 	}
 	
+	
 	/**
 	 * 
 	 * 配置地址，POST请求-自动回复
@@ -50,10 +55,51 @@ public class CallbackController {
 	@PostMapping("/callback")
 	@ResponseBody
 	public String callback(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		return null;
+		
+		Map<String, String> map = MessageUtil.xmlToMap(request);
+		String res = null;
+		System.out.println(map);
+		String MsgType = map.get("MsgType");
+		String ToUserName = map.get("ToUserName");
+		String FromUserName = map.get("FromUserName");
+		/*String Content = map.get("Content");
+		String MsgId = map.get("MsgId");*/
+		if (MsgType.equalsIgnoreCase("text")) {
+			Message message = new Message(); 
+			message.setFromUserName(ToUserName); 
+			message.setToUserName(FromUserName); 
+			message.setCreateTime(new Date().getTime());
+			//返回文字
+			message.setMsgType("text"); 
+			message.setContent("欢迎访问“旅行戳”公众号\n您可以在这里为您的照片加盖邮戳：\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/page\">上戳</a>" + 
+					"\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/jiangling\">查看江岭油菜花实时花况</a>"); 
+			//返回图片
+			/*message.setMsgType("image");
+			Image image = new Image();
+			image.setMediaId("Hv2Y74qH4NHhzsndt9GaCYIp9lqa78_3r97Z-bvpXrCoZbI8Or06ELqwkh2nROVZ");
+			message.setImage(image);*/
+			
+			res = MessageUtil.objectToXml(message);
+		} else if (MsgType.equalsIgnoreCase("event")) {
+			//订阅事件回复
+			String event = map.get("Event");
+			if (event.equalsIgnoreCase("subscribe")) {
+				Message message = new Message(); 
+				message.setFromUserName(ToUserName); 
+				message.setToUserName(FromUserName); 
+				message.setCreateTime(new Date().getTime());
+				//返回文字
+				message.setMsgType("text"); 
+				message.setContent("欢迎订阅“旅行戳”公众号\n您可以在这里为您的照片加盖邮戳：\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/page\">上戳</a>" +
+						"\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/jiangling\">查看江岭油菜花实时花况</a>"); 
+				res = MessageUtil.objectToXml(message);
+			}
+		}
+		
+		return res;
 	}
-
-
+	
+	
 	/**
 	 * 
 	 * 参数排列
