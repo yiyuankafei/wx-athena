@@ -10,7 +10,7 @@ public interface EmoticonMapper {
 
     int deleteByExample(EmoticonExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Emoticon record);
 
@@ -18,7 +18,7 @@ public interface EmoticonMapper {
 
     List<Emoticon> selectByExample(EmoticonExample example);
 
-    Emoticon selectByPrimaryKey(Long id);
+    Emoticon selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Emoticon record, @Param("example") EmoticonExample example);
 

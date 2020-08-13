@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yiyuankafei.wx.athena.mapper.EmoticonMapper">
   <resultMap id="BaseResultMap" type="com.yiyuankafei.wx.athena.entity.Emoticon">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
     <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
@@ -81,15 +81,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from emoticon
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from emoticon
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.yiyuankafei.wx.athena.entity.EmoticonExample">
     delete from emoticon
@@ -98,14 +98,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.yiyuankafei.wx.athena.entity.Emoticon">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into emoticon (tag, url)
     values (#{tag,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yiyuankafei.wx.athena.entity.Emoticon">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into emoticon
@@ -136,7 +136,7 @@
     update emoticon
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.tag != null">
         tag = #{record.tag,jdbcType=VARCHAR},
@@ -151,7 +151,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update emoticon
-    set id = #{record.id,jdbcType=BIGINT},
+    set id = #{record.id,jdbcType=INTEGER},
       tag = #{record.tag,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -168,12 +168,12 @@
         url = #{url,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yiyuankafei.wx.athena.entity.Emoticon">
     update emoticon
     set tag = #{tag,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

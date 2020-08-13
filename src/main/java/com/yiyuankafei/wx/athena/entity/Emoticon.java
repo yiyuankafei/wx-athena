@@ -4,7 +4,7 @@ public class Emoticon {
     /**
      * 主键ID
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 标签
@@ -16,11 +16,11 @@ public class Emoticon {
      */
     private String url;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
