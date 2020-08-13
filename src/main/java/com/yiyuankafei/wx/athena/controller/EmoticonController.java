@@ -35,5 +35,11 @@ public class EmoticonController {
 		log.info("/emoticon/get查询结果:{}", emoticon);
 		return emoticon;
 	}
+	
+	@RequestMapping("/delete")
+	public String delete(Integer id) {
+		Integer count = emoticonService.deleteByPrimaryKey(id);
+		return "删除成功,删除条数:" + count;
+	}
  
 }
