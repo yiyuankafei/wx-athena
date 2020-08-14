@@ -95,7 +95,15 @@ public class CallbackController {
 						"\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/jiangling\">查看江岭油菜花实时花况</a>"); 
 				res = MessageUtil.objectToXml(message);
 			} else if (event.equalsIgnoreCase("CLICK")) {
-				String key = map.get("EventKey") + "今日啊歌曲是：六月的雨" ;
+				String clickKey = map.get("EventKey");
+				String key = "不知道你要干嘛";
+				if (clickKey.equals("V1001_TODAY_MUSIC")) {
+					key = "(" + map.get("EventKey") + ")今日啊歌曲是：六月的雨" ;
+				} else if (clickKey.equals("V1001_GOOD")) {
+					key = map.get("EventKey") + "必须给你个赞" ;
+				} else {
+					key = map.get("EventKey") + key;
+				}
 				Message message = new Message(); 
 				message.setFromUserName(ToUserName); 
 				message.setToUserName(FromUserName); 
