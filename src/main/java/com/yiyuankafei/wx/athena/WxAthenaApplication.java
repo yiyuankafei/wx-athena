@@ -5,8 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 @MapperScan({"com.yiyuankafei.wx.athena.mapper","com.yiyuankafei.wx.athena.mapper.custom"})
 public class WxAthenaApplication extends SpringBootServletInitializer implements CommandLineRunner {
 	

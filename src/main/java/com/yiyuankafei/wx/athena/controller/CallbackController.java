@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.yiyuankafei.wx.athena.entity.wx.Message;
 import com.yiyuankafei.wx.athena.util.MessageUtil;
 import com.yiyuankafei.wx.athena.util.SHA1Util;
@@ -55,8 +56,8 @@ public class CallbackController {
 	@PostMapping("/callback")
 	@ResponseBody
 	public String callback(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
 		Map<String, String> map = MessageUtil.xmlToMap(request);
+		log.info("=====accept wx request=====:{}", JSON.toJSONString(map));
 		String res = null;
 		System.out.println(map);
 		String MsgType = map.get("MsgType");
@@ -92,6 +93,16 @@ public class CallbackController {
 				message.setMsgType("text"); 
 				message.setContent("欢迎订阅“旅行戳”公众号\n您可以在这里为您的照片加盖邮戳：\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/page\">上戳</a>" +
 						"\n<a href=\"http://yiyuankafei.natapp1.cc/postMark/jiangling\">查看江岭油菜花实时花况</a>"); 
+				res = MessageUtil.objectToXml(message);
+			} else if (event.equalsIgnoreCase("CLICK")) {
+				String key = map.get("EventKey") + "今日啊歌曲是：六月的雨" ;
+				Message message = new Message(); 
+				message.setFromUserName(ToUserName); 
+				message.setToUserName(FromUserName); 
+				message.setCreateTime(new Date().getTime());
+				//返回文字
+				message.setMsgType("text"); 
+				message.setContent(key); 
 				res = MessageUtil.objectToXml(message);
 			}
 		}
