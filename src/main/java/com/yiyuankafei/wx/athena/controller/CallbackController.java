@@ -100,7 +100,7 @@ public class CallbackController {
 				if (clickKey.equals("V1001_TODAY_MUSIC")) {
 					key = "(" + map.get("EventKey") + ")今日啊歌曲是：六月的雨" ;
 				} else if (clickKey.equals("V1001_GOOD")) {
-					key = map.get("EventKey") + "必须给你个赞" ;
+					key = "(" + map.get("EventKey") + ")必须给你个赞" ;
 				} else {
 					key = map.get("EventKey") + key;
 				}
