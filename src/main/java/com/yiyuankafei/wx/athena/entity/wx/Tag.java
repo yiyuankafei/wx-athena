@@ -11,5 +11,5 @@ public class Tag {
 
 @Data
 class TagItem {
-	private Integer id;
+	private String name;
 }

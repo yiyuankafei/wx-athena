@@ -30,6 +30,7 @@ public class UserController {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=" + CommonConstant.ACCESS_TOKEN);
 		StringEntity entity = new StringEntity(JSON.toJSONString(tagUser), "utf-8");
+		log.info("添加用户tag:{}", JSON.toJSONString(tagUser));
 		entity.setContentEncoding("UTF-8");
 		post.setHeader("Content-type", "application/json");
 		post.setEntity(entity);
@@ -47,6 +48,7 @@ public class UserController {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/tags/members/batchuntagging?access_token=" + CommonConstant.ACCESS_TOKEN);
 		StringEntity entity = new StringEntity(JSON.toJSONString(tagUser), "utf-8");
+		log.info("删除用户tag:{}", JSON.toJSONString(tagUser));
 		entity.setContentEncoding("UTF-8");
 		post.setHeader("Content-type", "application/json");
 		post.setEntity(entity);
@@ -64,7 +66,7 @@ public class UserController {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/tags/getidlist?access_token=" + CommonConstant.ACCESS_TOKEN);
 		StringEntity entity = new StringEntity(JSON.toJSONString(listUserTag), "utf-8");
-		log.info("=====get user tag list : {}=====", JSON.toJSONString(listUserTag));
+		log.info("查看用户tag列表: {}", JSON.toJSONString(listUserTag));
 		entity.setContentEncoding("UTF-8");
 		post.setHeader("Content-type", "application/json");
 		post.setEntity(entity);
@@ -82,6 +84,7 @@ public class UserController {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token=" + CommonConstant.ACCESS_TOKEN);
 		StringEntity entity = new StringEntity(JSON.toJSONString(specialMenuMatch), "utf-8");
+		log.info("测试用户绑定菜单:{}", JSON.toJSONString(specialMenuMatch));
 		entity.setContentEncoding("UTF-8");
 		post.setHeader("Content-type", "application/json");
 		post.setEntity(entity);

@@ -30,6 +30,7 @@ public class TagController {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/tags/create?access_token=" + CommonConstant.ACCESS_TOKEN);
 		StringEntity entity = new StringEntity(JSON.toJSONString(tag), "utf-8");
+		log.info("创建tag:{}", JSON.toJSONString(tag));
 		entity.setContentEncoding("UTF-8");
 		post.setHeader("Content-type", "application/json");
 		post.setEntity(entity);

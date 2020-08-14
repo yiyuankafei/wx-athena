@@ -52,6 +52,7 @@ public class MenuController {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=" + CommonConstant.ACCESS_TOKEN);
 		StringEntity entity = new StringEntity(JSON.toJSONString(menu), "utf-8");
+		log.info("创建个性化菜单:{}", JSON.toJSONString(menu));
 		entity.setContentEncoding("UTF-8");
 		post.setHeader("Content-type", "application/json");
 		post.setEntity(entity);

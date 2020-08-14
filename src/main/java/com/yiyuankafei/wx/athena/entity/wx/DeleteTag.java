@@ -11,5 +11,5 @@ public class DeleteTag {
 
 @Data
 class DeleteTagItem {
-	private String id;
+	private Integer id;
 }
