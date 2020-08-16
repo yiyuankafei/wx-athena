@@ -1,12 +1,16 @@
 package com.yiyuankafei.wx.athena;
 
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableDiscoveryClient
+@EnableDubbo(scanBasePackages = "com.yiyuankafei.wx.athena.dubbo.impl")
 @SpringBootApplication
 @EnableScheduling
 @MapperScan({"com.yiyuankafei.wx.athena.mapper","com.yiyuankafei.wx.athena.mapper.custom"})

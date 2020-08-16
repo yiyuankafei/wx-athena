@@ -1,0 +1,14 @@
+package com.yiyuankafei.wx.athena.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/message")
+public class MessageController {
+	
+	public String send() {
+		return "";
+	}
+
+}

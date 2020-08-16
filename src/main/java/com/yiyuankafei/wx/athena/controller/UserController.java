@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -94,6 +95,23 @@ public class UserController {
 		
 		String result = EntityUtils.toString(responseEntity, "UTF-8");
 		log.info("===== speicl menu match ===== : {}", result);
+		return result;
+	}
+	
+	@RequestMapping("/info")
+	public String info(String openId) throws Exception {
+		CloseableHttpClient client = HttpClients.createDefault();
+		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + CommonConstant.ACCESS_TOKEN + "&openid=" + openId
+				+ "&lang=zh_CN";
+		log.info("获取用户信息：{}", url);
+		HttpGet get = new HttpGet(url);
+		CloseableHttpResponse response = client.execute(get);
+		
+		HttpEntity responseEntity = response.getEntity();
+		
+		String result = EntityUtils.toString(responseEntity, "UTF-8");
+		log.info("===== user info ===== : {}", result);
+		
 		return result;
 	}
 	

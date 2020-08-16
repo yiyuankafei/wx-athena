@@ -15,8 +15,26 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     test-on-return: false
     username: root
+  application:
+    name: wx-athena
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+      server-addr: 47.92.209.37:8848
 
 mybatis:
   mapper-locations: classpath:com/yiyuankafei/wx/athena/mapper/*.xml,classpath:com/yiyuankafei/wx/athena/mapper/custom/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    
+dubbo:
+  application:
+    id: wx-athena
+  protocol:
+    name: dubbo
+    port: 29999
+  registry:
+    address: 47.92.209.37:8848
+    simplified: true
+    protocol: nacos
